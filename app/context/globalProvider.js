@@ -60,6 +60,10 @@ export const GlobalProvider = ({ children }) => {
             toast.error("Something went wrong");
         }
     }
+
+    const completedTasks = tasks.filter((task) => task.isCompleted === true);
+    const importantTasks = tasks.filter((task) => task.isImportant === true);
+    const incompleteTasks = tasks.filter((task) => task.isCompleted === false);
     React.useEffect(() => {
         if (user) allTasks();
     }, [user]);
@@ -70,7 +74,9 @@ export const GlobalProvider = ({ children }) => {
                 tasks,
                 isLoading,
                 deleteTask,
-
+                completedTasks,
+                importantTasks,
+                incompleteTasks
             }}
         >
             <GlobalUpdateContext.Provider value={{}}>
