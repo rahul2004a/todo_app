@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import Tasks from "./components/Tasks/Tasks";
+import { useGlobalState } from "./context/globalProvider";
 
 export default function Home() {
-  return <Tasks />;
+  const { tasks } = useGlobalState();
+  return <Tasks title="All Tasks" tasks={tasks} />;
 }

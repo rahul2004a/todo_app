@@ -2,6 +2,7 @@
 
 import React, { createContext, useState, useContext } from "react";
 import themes from "./themes";
+import axios from "axios";
 export const GlobalContext = createContext();
 export const GlobalUpdateContext = createContext();
 
@@ -14,10 +15,34 @@ export const GlobalProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
 
     const theme = themes[selectedTheme];
+
+    const allTasks = async () => {
+        setIsLoading(true);
+        try {
+            const res = await axios.get("/api/tasks");
+
+            const sorted = res.data.sort((a, b) => {
+                return (
+                    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                );
+            });
+
+            setTasks(sorted);
+
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    React.useEffect(() => {
+        allTasks();
+    }, []);
     return (
         <GlobalContext.Provider
             value={{
-                theme
+                theme,
+                tasks
             }}
         >
             <GlobalUpdateContext.Provider value={{}}>

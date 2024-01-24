@@ -9,9 +9,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { arrowLeft, bars, logout } from "@/app/utils/Icons";
 import Button from "../Buttton/Button";
+import { useClerk } from "@clerk/nextjs";
+
 const Sidebar = () => {
   const { theme } = useGlobalState();
-
+  const { signOut } = useClerk();
   const router = useRouter();
   const pathname = usePathname();
   const handleClick = (link: string) => {
@@ -53,7 +55,9 @@ const Sidebar = () => {
           fw={"500"}
           fs={"1.2rem"}
           icon={logout}
-          click={() => {}}
+          click={() => {
+            signOut(() => router.push("/signin"));
+          }}
         />
       </div>
     </SidebarStyled>
