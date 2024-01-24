@@ -15,11 +15,9 @@ const Tasks = ({ title, tasks }: Props) => {
   return (
     <TaskStyled theme={theme}>
       <h1>{title}</h1>
-
       <button className="btn-rounded" onClick={openModal}>
         {plus}
       </button>
-
       <div className="tasks grid">
         {tasks.map((task) => (
           <TaskItem
@@ -36,6 +34,7 @@ const Tasks = ({ title, tasks }: Props) => {
           Add New Task
         </button>
       </div>
+      )
     </TaskStyled>
   );
 };
