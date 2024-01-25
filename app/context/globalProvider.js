@@ -19,6 +19,18 @@ export const GlobalProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
 
     const theme = themes[selectedTheme];
+
+    const openModal = () => {
+        setModal(true);
+    };
+
+    const closeModal = () => {
+        setModal(false);
+    };
+
+    const collapseMenu = () => {
+        setCollapsed(!collapsed);
+    };
     const allTasks = async () => {
         setIsLoading(true);
         try {
@@ -76,7 +88,15 @@ export const GlobalProvider = ({ children }) => {
                 deleteTask,
                 completedTasks,
                 importantTasks,
-                incompleteTasks
+                incompleteTasks,
+                updateTask,
+                modal,
+                openModal,
+                closeModal,
+                allTasks,
+                collapseMenu,
+                collapsed
+
             }}
         >
             <GlobalUpdateContext.Provider value={{}}>

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import CreateContent from "../Modals/CreateContent";
 import { add, plus } from "@/app/utils/Icons";
 import TaskItem from "../TaskItem/TaskItem";
+import Modal from "../Modals/Modal";
 interface Props {
   title: string;
   tasks: any[];
@@ -14,6 +15,7 @@ const Tasks = ({ title, tasks }: Props) => {
 
   return (
     <TaskStyled theme={theme}>
+      {modal && <Modal content={<CreateContent />} />}
       <h1>{title}</h1>
       <button className="btn-rounded" onClick={openModal}>
         {plus}
